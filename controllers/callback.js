@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 
 export const receiveRequest = async (req, res) => {
-  const { name, phone } = req.body;
+  const { name, phone, time, comments } = req.body;
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -14,9 +14,9 @@ export const receiveRequest = async (req, res) => {
   // Setup email data with unicode symbols
   const mailOptions = {
     from: "eshaanbagga@gmail.com",
-    to: "eshaanbagga11@gmail.com",
+    to: "ravi@anchors.in",
     subject: "New Call Back Request from anchors app",
-    text: `Call back request from ${name} with phone number ${phone}`,
+    text: `Call back request from ${name} with phone number ${phone}. They want to be called at ${time}. They have left the following comments: ${comments}`,
   };
 
   // Send mail with defined transport object
