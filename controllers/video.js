@@ -31,7 +31,6 @@ export const getVideos = (req, res) => {
     // Find all videos and sort by 'earnings'
     Video.find({}).sort({ earnings: -1 }).exec()
         .then((videos) => {
-            console.log(videos);
             res.json(videos);
         })
         .catch((err) => {
