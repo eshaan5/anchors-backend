@@ -2,17 +2,21 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import routes from './routes/video.js';
+import videoRoutes from './routes/video.js';
+import callbackRoutes from './routes/callback.js';
+import dotenv from 'dotenv';
 
 const app = express();
 
 app.use(bodyParser.json({ limit: '30mb', extended: true}));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true}));
 app.use(cors());
+dotenv.config();
 
-app.use('/videos', routes);
+app.use('/videos', videoRoutes);
+app.use('/callback', callbackRoutes);
 
-const CONNECTION_URL = 'mongodb+srv://eshaan:Passw0rd@cluster0.c32nzga.mongodb.net/?retryWrites=true&w=majority';
+const CONNECTION_URL = process.env.MONGO_URI;
 
 const PORT = process.env.PORT || 5000;
 
